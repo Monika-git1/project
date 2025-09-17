@@ -1,0 +1,15 @@
+<h1 id="output">Name</h1>
+
+<button id="one"  onclick="change()">Monika</button>
+<button id="two" onclick="change()">SabariNathan</button>
+<button id="three" onclick="change()">Thangarasu</button>
+
+
+<script>
+    var One = document.getElementById("one")
+    var Two = document.getElementById("two")
+    var Three = document.getElementById("three")
+    function change(){
+        document.getElementById("output").innerText =  event.target.innerText
+    }
+</script>

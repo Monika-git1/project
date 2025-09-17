@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+
+    form {
+      display: inline-block;
+      border: 2px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+      background: #f9f9f9;
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      width: 200px;
+      padding: 6px;
+      margin: 6px 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    #saveBtn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    #saveBtn:hover {
+      opacity: 0.8;
+    }
+
+    table {
+      margin: auto;
+      border-collapse: collapse;
+      width: 80%;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ddd;
+    }
+
+    .deleteBtn {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .deleteBtn:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <h1>STUDENT FORM</h1>
+
+  <!-- Student Form -->
+  <form id="studentForm" onsubmit="return addStudent()">
+    <label>Name</label>
+    <input type="text" id="name" required>
+
+    <label>Age</label>
+    <input type="number" id="age" required>
+
+    <label>Gender</label>
+    <input type="radio" name="gender" value="Male" required> Male
+    <input type="radio" name="gender" value="Female"> Female
+
+    <label>Course</label>
+    <select id="course" required>
+      <option value="Python">Python</option>
+      <option value="JavaScript">JavaScript</option>
+      <option value="Java">Java</option>
+      <option value="C++">C++</option>
+    </select>
+
+    <label>E-mail</label>
+    <input type="email" id="email" required>
+
+    <button type="submit" id="saveBtn">Save</button>
+  </form>
+
+  <!-- Student Table -->
+  <table id="studentTable">
+    <thead>
+      <tr>
+        <th>NAME</th>
+        <th>AGE</th>
+        <th>COURSE</th>
+        <th>GENDER</th>
+        <th>EMAIL</th>
+        <th>ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data will be added here dynamically -->
+    </tbody>
+  </table>
+
+  <script>
+    function addStudent() {
+      // Get form values
+      var name = document.getElementById("name").value;
+      var age = document.getElementById("age").value;
+      var course = document.getElementById("course").value;
+      var email = document.getElementById("email").value;
+      var gender = document.querySelector('input[name="gender"]:checked').value;
+
+      // Get table body
+      var table = document.getElementById("studentTable").getElementsByTagName("tbody")[0];
+
+      // Insert new row
+      var newRow = table.insertRow();
+
+      newRow.insertCell(0).innerText = name;
+      newRow.insertCell(1).innerText = age;
+      newRow.insertCell(2).innerText = course;
+      newRow.insertCell(3).innerText = gender;
+      newRow.insertCell(4).innerText = email;
+
+      // Delete button
+      var actionCell = newRow.insertCell(5);
+      var deleteBtn = document.createElement("button");
+      deleteBtn.innerText = "Delete";
+      deleteBtn.className = "deleteBtn";
+      deleteBtn.onclick = function() {
+        table.deleteRow(newRow.rowIndex - 1);
+      };
+      actionCell.appendChild(deleteBtn);
+
+      // Clear form
+      document.getElementById("studentForm").reset();
+
+      // Prevent page reload
+      return false;
+    }
+  </script>
+</body>
+</html>
+
+

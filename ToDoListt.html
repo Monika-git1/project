@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #input {
+      padding: 8px;
+      width: 200px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    
+    #addBtn {
+      background-color: #28a745; /* green */
+      color: white;
+      margin-left: 5px;
+    }
+
+   
+    .deleteBtn {
+      background-color: #dc3545; /* red */
+      color: white;
+      margin-left: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      background: rgba(255, 255, 255, 0.1);
+      margin: 8px auto;
+      padding: 10px;
+      width: 300px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>My To-Do List</h1>
+
+  <input id="input" placeholder="Enter task...">
+  <button id="addBtn" onclick="add()">Add</button>
+
+  <ul id="list-container">
+    <li>
+      Hit the gym
+      <button class="deleteBtn" onclick="deleteItem(event)">Delete</button>
+    </li>
+  </ul>
+
+  <script>
+    var ul = document.getElementById("list-container");
+    var input = document.getElementById("input");
+
+    function add() {
+      if (input.value.trim() === "") {
+        alert("Please enter a task!");
+        return;
+      }
+      var listitem = document.createElement("li");
+      listitem.innerHTML = input.value + 
+        "<button class='deleteBtn' onclick='deleteItem(event)'>Delete</button>";
+      ul.append(listitem);
+      input.value = ""; 
+    }
+
+    function deleteItem(event) {
+      event.target.parentElement.remove();
+    }
+  </script>
+</body>
+</html>
